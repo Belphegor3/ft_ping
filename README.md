@@ -14,7 +14,7 @@ Normalement les distributions recentes le permettent et c est pour ca que le suj
 
 ## Explications du graph du [RFC 792](http://patrick.monassier.free.fr/rfc/rfc792.htm)
 
-![graph](image.png)
+![graph](images/champs_icmp.png)
 
 Type: indique le type de message ICMP, 0 pour la reponse d echo (hote) ou 8 pour un message d echo (quand on envoit le ping).   
 Code: c est presque toujours 0 donc on mettra toujours 0.  
@@ -63,7 +63,7 @@ Surement pas besoin de flags mais sinon voir **MSG_TRUNC**
 
 Neanmoins il faut bel et bien que chaque argument soit valide  
 
-![erreurs](image-1.png)
+![erreurs](images/multi_arg.png)
 
 
 ### SIGQUIT
@@ -71,14 +71,14 @@ Neanmoins il faut bel et bien que chaque argument soit valide
 SIGQUIT = ctrl + \  
 SIGQUIT ne quitte pas mais donne un compte rendu  
 
-![SIGQUIT](image-2.png)
+![SIGQUIT](images/sigquit.png)
 
 ### SIGINT
 
 SIGINT = ctrl + C
 Ca quitte mais avant ca donne un petit compte rendu  
 
-![SIGINT](image-3.png)
+![SIGINT](images/sigint.png)
 
 ### EOF
 
@@ -92,4 +92,4 @@ Ca ne fait rien et on peut ecrire dans le terminal pendant que Ping est en cours
 
 
 [^1]: payload signifie "charge utile". C est la partie du paquet qui contient les donnees reellements transportees, par opposition aux informations techniques de transport (header).  
-[^2]: redefinir les parametres du terminal (voir [tcsetattr](https://manpages.debian.org/testing/manpages-fr-dev/tcsetattr.3.fr.html))
+[^2]: sert a redefinir les parametres du terminal (voir [tcsetattr](https://manpages.debian.org/testing/manpages-fr-dev/tcsetattr.3.fr.html))
