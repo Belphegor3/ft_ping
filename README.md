@@ -23,9 +23,10 @@ Identificateur: sert a reconnaitre nos paquets (donc juste un getpid).
 Numero de sequence: compteur qui augmente.  
 Data: le contenu du paquet. Le serveur renvoit les memes donnees.  
 
-## Precisions du man de socket 
+## Precisions des man
 
-Dans le man de socket:
+### SOCKET
+
 - **int socket(int domain, int type, int protocol);**
 - Normally only a single protocol exists to support a particular
        socket  **type** within a given protocol family, in which case protocol can
@@ -39,13 +40,49 @@ Dans le man de socket:
 **SOCK_DGRAM** utilise le protocol UDP qui ne nous interesse pas pour ce projet.
 On va donc utiliser **SOCK_RAW**.
 
-| ARG | VALUE | MEANING |
+| ARG | VALEUR | DEFINITION |
 | ------- | ------ | ---------------- |
 | domain | AF_INET | USE IPv4 Protocol |
 | type | SOCK_RAW | On construit nous meme le header ICMP et le payload[^1] |
 | protocol | IP_PROTOICMP | Nous restreint a l utilisation des paquets IP qui contiennent des messages ICMP |
 
 
+### RECVFROM
+
+**ssize_t recvfrom(int sockfd, void buf[restrict .size], size_t size, int flags, struct sockaddr *_Nullable restrict src_addr, socklen_t *_Nullable restrict addrlen);**
+Cette fonction sert a recevoir des messages de **sockfd** en les placant dans **buf** sachant que la taille du buffer doit etre precise dans **size**.  
+Surement pas besoin de flags mais sinon voir **MSG_TRUNC**  
+
+
+
+
+## Bizarreries
+
+### Ping ne fonctionne pas avec plusieurs arguments
+
+Neanmoins il faut bel et bien que chaque argument soit valide  
+
+![erreurs](image-1.png)
+
+
+### SIGQUIT
+
+SIGQUIT = ctrl + \  
+SIGQUIT ne quitte pas mais donne un compte rendu  
+
+![SIGQUIT](image-2.png)
+
+### SIGINT
+
+SIGINT = ctrl + C
+Ca quitte mais avant ca donne un petit compte rendu  
+
+![SIGINT](image-3.png)
+
+### EOF
+
+end of file = ctrl + D
+Ca ne fait rien et on peut ecrire dans le terminal pendant que Ping est en cours donc on ne gere pas non plus les termios[^2]
 
 
 
@@ -53,9 +90,5 @@ On va donc utiliser **SOCK_RAW**.
 
 
 
-
-
-
-
-
-[^1]: payload signifie "charge utile". C est la partie du paquet qui contient les donnees reellements transportees, par opposition aux informations techniques de transport (header).
+[^1]: payload signifie "charge utile". C est la partie du paquet qui contient les donnees reellements transportees, par opposition aux informations techniques de transport (header).  
+[^2]: redefinir les parametres du terminal (voir [tcsetattr](https://manpages.debian.org/testing/manpages-fr-dev/tcsetattr.3.fr.html))
