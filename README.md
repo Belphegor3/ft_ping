@@ -49,7 +49,8 @@ On va donc utiliser **SOCK_RAW**.
 
 ### RECVFROM
 
-**ssize_t recvfrom(int sockfd, void buf[restrict .size], size_t size, int flags, struct sockaddr *_Nullable restrict src_addr, socklen_t *_Nullable restrict addrlen);**
+**ssize_t recvfrom(int sockfd, void buf[restrict .size], size_t size, int flags, struct sockaddr \*_Nullable restrict src_addr, socklen_t \*_Nullable restrict addrlen);**  
+
 Cette fonction sert a recevoir des messages de **sockfd** en les placant dans **buf** sachant que la taille du buffer doit etre precise dans **size**.  
 Surement pas besoin de flags mais sinon voir **MSG_TRUNC**  
 
