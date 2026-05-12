@@ -12,7 +12,7 @@ Et heureusement parce que seul les messages d echo et les reponses d echo peuven
 Par default le kernel ne permet pas les echnages de datagrammes ICMP pour les utilisateurs (meme root).
 Normalement les distributions recentes le permettent et c est pour ca que le sujet requiert une distrib plutot recente (meme si debian 7 date de 2013).  
 
-## Explications du graph du [RFC 792](http://patrick.monassier.free.fr/rfc/rfc792.htm)
+## Explications des champs ICMP [RFC 792](http://patrick.monassier.free.fr/rfc/rfc792.htm)
 
 ![graph](images/champs_icmp.png)
 
