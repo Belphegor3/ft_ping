@@ -1,6 +1,6 @@
 NAME = ft_ping
 
-C = clang
+C = gcc
 CFLAGS = -Wall -Wextra -Werror -g3
 
 OBJ_DIR = objs
@@ -9,23 +9,25 @@ INC_DIR = ./inc
 
 IFLAGS = -I$(INC_DIR)
 
-vpath %.cpp $(foreach dir, $(SRC_DIR), $(dir):)
+vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
-# CHECKERS = dimension_sign.cpp equal.cpp check_format.cpp intruder.cpp nonsense.cpp operand.cpp unknown.cpp variable.cpp
-# FIND_VALUES = discriminant_calculation.cpp determine_degree.cpp find_abc.cpp
-# MATHS = ft_sqrt.cpp
-# PRINTS = print_reduced_form.cpp
+CALCUL = checksum.c mdev.c
+INIT = init_ping.c
+PARSING = check_args.c
+PRINTS = print.c
+SIGNAUX = sigquit.c sigint.c
+TIME = time.c
 
-SRC = main.cpp #$(CHECKERS) $(FIND_VALUES) $(MATHS) $(PRINTS)
+SRC = main.c $(CALCUL) $(INIT) $(PARSING) $(PRINTS) $(SIGNAUX) $(TIME)
 
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: test $(NAME)
 
 $(NAME): $(OBJ)
-	$(C) $(CFLAGS) $^ -o $@
+	$(C) $(CFLAGS) $^ -o $@ -lm
 
-$(OBJ_DIR)/%.o: %.cpp
+$(OBJ_DIR)/%.o: %.c
 	$(C) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 test:
